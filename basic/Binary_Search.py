@@ -1,30 +1,14 @@
 class Solution(object):
     def search(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        now_array = nums
-        mid = len(now_array) // 2
-        t_index = mid
+        left, right = 0, len(nums) - 1
 
-        while(target != nums[t_index] and len(now_array) > 3):
-            if target < nums[t_index]:
-                now_array = nums[0 : t_index]
-                mid = len(now_array) // 2
-                t_index -= mid
-            elif target > nums[t_index]:
-                now_array = nums[t_index + 1 :]
-                mid = len(now_array) // 2
-                t_index += mid
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] < target:
+                left = mid + 1
             else:
-                return t_index
+                right = mid - 1
 
-        if nums[t_index] == target:
-            return t_index
-        else:
-            return -1
-
-
-
+        return -1
